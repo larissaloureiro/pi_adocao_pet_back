@@ -25,13 +25,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "tb_Usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Auto-increment
-	@Column(name="id_usuario")
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment
+	@Column(name = "id_usuario")
 	private Long id;
-	
+
 	@NotBlank
 	@Size(max = 45)
 	@Column(name = "nome_usuario")
@@ -57,7 +56,7 @@ public class Usuario implements Serializable {
 	@Size(max = 11)
 	@Column(name = "cpf_usuario")
 	private String cpf;
-	
+
 	@NotBlank
 	@Column(name = "data_nascimento_usuario")
 	private Date dataNascimento;
@@ -65,7 +64,7 @@ public class Usuario implements Serializable {
 	@NotBlank
 	@Column(name = "data_cadastro_usuario")
 	private Date dataCadastro;
-	
+
 	// Endereco
 	@NotBlank
 	@Size(max = 50)
@@ -76,12 +75,12 @@ public class Usuario implements Serializable {
 	@Size(max = 9)
 	@Column(name = "cep_end_usuario")
 	private String cep;
-	
+
 	@NotBlank
 	@Size(max = 9)
 	@Column(name = "localidade_end_usuario")
 	private String localidade;
-	
+
 	@NotBlank
 	@Size(max = 9)
 	@Column(name = "uf_end_usuario")
@@ -101,13 +100,13 @@ public class Usuario implements Serializable {
 	@Size(max = 45)
 	@Column(name = "referencia_end_usuario")
 	private String referencia;
-	//Fim do Endereco
-	
+	// Fim do Endereco
+
 	@NotBlank
 	@Size(max = 15)
 	@Column(name = "tipo_usuario")
 	private Tipo tipo;
-	
+
 	public Boolean validaCpf() {
 		if (this.cpf.length() != 11) {
 			return false;
@@ -143,7 +142,7 @@ public class Usuario implements Serializable {
 
 		return true;
 	}
-	
+
 	public Boolean possuiIdadeMinima() {
 		Integer idade = this.calculaIdade(this.dataNascimento);
 		if (idade >= 18) {
@@ -151,9 +150,9 @@ public class Usuario implements Serializable {
 		}
 		return false;
 	}
-	
-	public Integer calculaIdade(Date dataNascimento) {		
-		
+
+	public Integer calculaIdade(Date dataNascimento) {
+
 		Calendar dataNascimentoCalendar = Calendar.getInstance();
 		dataNascimentoCalendar.setTime(dataNascimento);
 		Integer anoNascimento = dataNascimentoCalendar.get(Calendar.YEAR);
@@ -164,14 +163,13 @@ public class Usuario implements Serializable {
 		Integer anoAtual = dataAtual.get(Calendar.YEAR);
 		Integer mesAtual = dataAtual.get(Calendar.MONTH);
 		Integer diaAtual = dataAtual.get(Calendar.DAY_OF_MONTH);
-		
+
 		Integer idade = anoAtual - anoNascimento;
 		if (mesAtual < mesNascimento || (mesAtual == mesNascimento && diaAtual < diaNascimento)) {
 			idade--;
 		}
-		
+
 		return idade;
 	}
-	
 
 }
