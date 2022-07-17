@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi_adocao_pet.security.LoginVO;
-import br.com.pi_adocao_pet.security.jwt.JwtProvider;
 import br.com.pi_adocao_pet_back.repository.LoginRepository;
 //import io.swagger.v3.oas.annotations.tags.Tag;
+import br.com.pi_adocao_pet_back.security.jwt.JwtProvider;
 
 //@Tag(name="Authentication Endpoint")
 @RestController

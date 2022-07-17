@@ -1,4 +1,4 @@
-package br.com.pi_adocao_pet.security.jwt;
+package br.com.pi_adocao_pet_back.security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

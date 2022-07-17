@@ -1,4 +1,4 @@
-package br.com.pi_adocao_pet.security.jwt;
+package br.com.pi_adocao_pet_back.security.jwt;
 
 import java.util.Base64;
 import java.util.Date;
@@ -25,7 +25,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JwtProvider {
 
-	@Value("${security.jwt.token.secret-key}")
+	//@Value("${security.jwt.token.secret-key}")
 	private String secretKey = "secret";
 
 	@Value("${security.jwt.token.expire-length:3600000}")

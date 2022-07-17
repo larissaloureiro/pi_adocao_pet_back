@@ -1,4 +1,4 @@
-package br.com.pi_adocao_pet.security.jwt;
+package br.com.pi_adocao_pet_back.security.jwt;
 
 import java.io.IOException;
 
