@@ -51,9 +51,9 @@ public class AdocaoService {
 	public AdocaoVO atualizar(AdocaoVO adocao) {
 		var entity = repository.findById(adocao.getKey())
 				.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado registro com esse Id."));
-		entity.setStatus(adocao.getStatus());
-		entity.setDataSolicitacao(adocao.getDataSolicitacao());
-		entity.setDataAtualizacao(adocao.getDataAtualizacao());
+//		entity.setStatus(adocao.getStatus());
+//		entity.setDataSolicitacao(adocao.getDataSolicitacao());
+//		entity.setDataAtualizacao(adocao.getDataAtualizacao());
 
 		var vo = DozerConverter.parseObject(repository.save(entity), AdocaoVO.class);
 		return vo;
