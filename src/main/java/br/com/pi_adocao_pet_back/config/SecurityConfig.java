@@ -7,6 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import br.com.pi_adocao_pet.security.jwt.JwtProvider;
+
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
