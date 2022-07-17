@@ -53,23 +53,23 @@ public class UsuarioService {
 		var entity = repository.findById(usuario.getKey())
 				.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado registro com esse ID."));
 
-//		entity.setNome(usuario.getNome());
-//		entity.setTelefone(usuario.getTelefone());
-//		entity.setEmail(usuario.getEmail());
-//		entity.setRg(usuario.getRg());
-//		entity.setCpf(usuario.getCpf());
-//		entity.setDataNascimento(usuario.getDataNascimento());
-//		entity.setDataCadastro(usuario.getDataCadastro());
-//
-//		entity.setLogradouro(usuario.getLogradouro());
-//		entity.setCep(usuario.getCep());
-//		entity.setLocalidade(usuario.getLocalidade());
-//		entity.setUf(usuario.getUf());
-//		entity.setNumero(usuario.getNumero());
-//		entity.setComplemento(usuario.getComplemento());
-//		entity.setReferencia(usuario.getReferencia());
-//
-//		entity.setTipo(usuario.getTipo());
+		entity.setNome(usuario.getNome());
+		entity.setTelefone(usuario.getTelefone());
+		entity.setEmail(usuario.getEmail());
+		entity.setRg(usuario.getRg());
+		entity.setCpf(usuario.getCpf());
+		entity.setDataNascimento(usuario.getDataNascimento());
+		entity.setDataCadastro(usuario.getDataCadastro());
+
+		entity.setLogradouro(usuario.getLogradouro());
+		entity.setCep(usuario.getCep());
+		entity.setLocalidade(usuario.getLocalidade());
+		entity.setUf(usuario.getUf());
+		entity.setNumero(usuario.getNumero());
+		entity.setComplemento(usuario.getComplemento());
+		entity.setReferencia(usuario.getReferencia());
+
+		entity.setTipo(usuario.getTipo());
 
 		if (!entity.validaCpf()) {
 			throw new IllegalArgumentException("CPF Inválido.");

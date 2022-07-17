@@ -39,9 +39,9 @@ public class Adocao implements Serializable {
 	@JoinColumn(name = "id_Usuario")
 	private Usuario usuario;
 
-//	@OneToOne
-//	@JoinColumn(name = "id_Animal")
-//	private Animal animal;
+	@OneToOne
+	@JoinColumn(name = "id_Animal")
+	private Animal animal;
 
 	@NotBlank
 	@Column(name = "status")
