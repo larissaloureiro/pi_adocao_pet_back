@@ -3,45 +3,39 @@ package br.com.pi_adocao_pet_back.security;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CredenciaisVO implements Serializable {
+import lombok.Data;
+
+public class LoginVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String username;
-	private String password;
+	private String senha;
 	
-	
-	public CredenciaisVO() {
-		super();
+	public LoginVO() {
+		
 	}
-
-	public CredenciaisVO(String username, String password) {
-		super();
+	
+	public LoginVO(String username, String senha) {
 		this.username = username;
-		this.password = password;
+		this.senha = senha;
 	}
-
 	public String getUsername() {
 		return username;
 	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String password) {
+		this.senha = password;
 	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(password, username);
+		return Objects.hash(senha, username);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -50,9 +44,8 @@ public class CredenciaisVO implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CredenciaisVO other = (CredenciaisVO) obj;
-		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		LoginVO other = (LoginVO) obj;
+		return Objects.equals(senha, other.senha) && Objects.equals(username, other.username);
 	}
-	
-	
+
 }

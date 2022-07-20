@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.pi_adocao_pet.security.LoginVO;
+
 import br.com.pi_adocao_pet_back.repository.LoginRepository;
+import br.com.pi_adocao_pet_back.security.LoginVO;
 //import io.swagger.v3.oas.annotations.tags.Tag;
 import br.com.pi_adocao_pet_back.security.jwt.JwtProvider;
 

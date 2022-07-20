@@ -33,52 +33,52 @@ public class Animal implements Serializable {
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "nome")
-	private String Nome;
+	private String nome;
 
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "raca")
-	private String Raca;
+	private String raca;
 
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "especie")
-	private String Especie;
+	private String especie;
 
 	@NotBlank
 	@Size(max = 250)
 	@Column(name = "descricao")
-	private String Descricao;
+	private String descricao;
 
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "porte")
-	private String Porte;
+	private String porte;
 
 	@NotBlank
 	@Column(name = "idade")
-	private Integer Idade;
+	private Integer idade;
 
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "sexo")
-	private String Sexo;
+	private String sexo;
 
 	@NotBlank
 	@Size(max = 50)
 	@Column(name = "foto_url")
-	private String FotoUrl;
+	private String fotoUrl;
 
 	@NotBlank
 	@Column(name = "data_cadastro")
-	private Date DataCadastro;
+	private Date dataCadastro;
 
 	@NotBlank
 	@Column(name = "disponivel")
-	private Boolean Disponivel;
+	private Boolean disponivel;
 
 	@NotBlank
 	@Size(max = 250)
 	@Column(name = "inf_adicionais")
-	private String InfAdicionais;
+	private String infAdicionais;
 }

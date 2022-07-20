@@ -15,34 +15,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializable{
-	
+public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Mapping("id")
 	private Long key;
-    private String Nome;
-    private String Raca;
-	private String Especie;
-	private String Descricao;
-	private String Porte;
-	private Integer Idade;
-	private String Sexo;
-	private String FotoUrl;
-	private Date DataCadastro;
-	private Boolean Disponivel;
-	private String InfAdicionais;
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(
-			key, Nome, Raca, Especie, Descricao, Porte, Idade,
-			Sexo, FotoUrl, DataCadastro, Disponivel, InfAdicionais
-		);
-		return result;
-	}
+	private String nome;
+	private String raca;
+	private String especie;
+	private String descricao;
+	private String porte;
+	private Integer idade;
+	private String sexo;
+	private String fotoUrl;
+	private Date dataCadastro;
+	private Boolean disponivel;
+	private String infAdicionais;
 
 	@Override
 	public boolean equals(Object obj) {
@@ -53,17 +42,21 @@ public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializa
 		if (getClass() != obj.getClass())
 			return false;
 		AnimalVO other = (AnimalVO) obj;
-		return Objects.equals(key, other.key)
-                && Objects.equals(Nome, other.Nome)
-                && Objects.equals(Raca, other.Raca)
-				&& Objects.equals(Especie, other.Especie)
-				&& Objects.equals(Descricao, other.Descricao)
-				&& Objects.equals(Porte, other.Porte)
-				&& Objects.equals(Idade, other.Idade)
-				&& Objects.equals(Sexo, other.Sexo)
-				&& Objects.equals(FotoUrl, other.FotoUrl)
-				&& Objects.equals(DataCadastro, other.DataCadastro)
-				&& Objects.equals(Disponivel, other.Disponivel)
-				&& Objects.equals(InfAdicionais, other.InfAdicionais);
+		return Objects.equals(dataCadastro, other.dataCadastro) && Objects.equals(descricao, other.descricao)
+				&& Objects.equals(disponivel, other.disponivel) && Objects.equals(especie, other.especie)
+				&& Objects.equals(fotoUrl, other.fotoUrl) && Objects.equals(idade, other.idade)
+				&& Objects.equals(infAdicionais, other.infAdicionais) && Objects.equals(key, other.key)
+				&& Objects.equals(nome, other.nome) && Objects.equals(porte, other.porte)
+				&& Objects.equals(raca, other.raca) && Objects.equals(sexo, other.sexo);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(dataCadastro, descricao, disponivel, especie, fotoUrl, idade,
+				infAdicionais, key, nome, porte, raca, sexo);
+		return result;
+	}
+
 }

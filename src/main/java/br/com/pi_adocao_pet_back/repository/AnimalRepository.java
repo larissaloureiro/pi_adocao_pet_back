@@ -13,10 +13,10 @@ import br.com.pi_adocao_pet_back.domain.entity.Animal;
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
-    @Query("Select m from Animal m where m.disponivel = :disponivel")
+    @Query("Select a from Animal a where a.disponivel = :disponivel")
 	Page<Animal> findAllByDisponivel(@Param("disponivel") Boolean disponivel, Pageable pageable);
 
-    @Query("Select m from Animal m where m.especie = :especie")
+    @Query("Select a from Animal a where a.especie = :especie")
 	Page<Animal> findAllByEspecie(@Param("especie") String especie, Pageable pageable);
 
 }

@@ -7,14 +7,9 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -40,7 +35,7 @@ public class Login implements UserDetails, Serializable {
 
 //	@OneToOne
 //	@JoinColumn(name = "id_usuario")
-//	private Usuario idUsuario;
+//	private Usuario usuario;
 
 	@Column(name = "username_login", unique = true) // não permite repetição do valor do objeto
 	private String username;

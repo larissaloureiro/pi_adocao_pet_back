@@ -31,8 +31,8 @@ public class AdocaoService {
 		return DozerConverter.parseObject(entity, AdocaoVO.class);
 	}
 
-	public Page<AdocaoVO> buscarTodosPorIdUsuario(long idUsuario, Pageable pageable) {
-		var page = repository.findAllByIdUsuario(idUsuario, pageable);
+	public Page<AdocaoVO> buscarTodosPorUsuario(long idUsuario, Pageable pageable) {
+		var page = repository.findAllByUsuario(idUsuario, pageable);
 		return page.map(this::convertToAdocaoVO);
 	}
 

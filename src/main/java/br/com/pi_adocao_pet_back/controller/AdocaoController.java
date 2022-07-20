@@ -60,7 +60,7 @@ public class AdocaoController {
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "id"));
-		Page<AdocaoVO> adocaoVO = service.buscarTodosPorIdUsuario(idUsuario, pageable);
+		Page<AdocaoVO> adocaoVO = service.buscarTodosPorUsuario(idUsuario, pageable);
 		adocaoVO.stream()
 				.forEach(f -> f.add(linkTo(methodOn(AdocaoController.class).findById(f.getKey())).withSelfRel()));
 		return ResponseEntity.ok(CollectionModel.of(adocaoVO));

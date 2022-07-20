@@ -1,7 +1,6 @@
 package br.com.pi_adocao_pet_back.domain.entity;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,9 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,11 +33,11 @@ public class Adocao implements Serializable {
 	private Long id;
 
 	@ManyToOne 
-	@JoinColumn(name = "id_Usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	@OneToOne
-	@JoinColumn(name = "id_Animal")
+	@JoinColumn(name = "id_animal")
 	private Animal animal;
 
 	@NotBlank

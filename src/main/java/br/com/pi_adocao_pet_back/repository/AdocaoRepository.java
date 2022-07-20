@@ -10,8 +10,8 @@ import br.com.pi_adocao_pet_back.domain.entity.Adocao;
 
 public interface AdocaoRepository extends JpaRepository<Adocao, Long> {
 		
-		@Query("Select m from Adocao m where m.idUsuario.id= :id")
-		Page<Adocao> findAllByIdUsuario(@Param("id") Long id, Pageable pageable);
+		@Query("Select a from Adocao a where a.usuario.id= :id")
+		Page<Adocao> findAllByUsuario(@Param("id") Long id, Pageable pageable);
 }
 
 
