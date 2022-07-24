@@ -54,6 +54,10 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.referencia = referencia;
 		this.tipo = tipo;
 	}
+		public UsuarioVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getKey() {
 		return key;
