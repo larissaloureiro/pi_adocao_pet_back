@@ -33,6 +33,10 @@ public class AdocaoVO extends RepresentationModel<AdocaoVO> implements Serializa
 		this.dataSolicitacao = dataSolicitacao;
 		this.dataAtualizacao = dataAtualizacao;
 	}
+	public AdocaoVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Long getKey() {
 		return key;
 	}
@@ -42,7 +46,7 @@ public class AdocaoVO extends RepresentationModel<AdocaoVO> implements Serializa
 	public UsuarioVO getUsuario() {
 		return usuario;
 	}
-	public void setTutor(UsuarioVO usuario) {
+	public void setUsuario(UsuarioVO usuario) {
 		this.usuario = usuario;
 	}
 	public AnimalVO getAnimal() {

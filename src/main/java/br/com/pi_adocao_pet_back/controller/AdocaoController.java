@@ -49,17 +49,17 @@ public class AdocaoController {
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
-		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "nome"));
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "id"));
 		Page<AdocaoVO> adocaoVO = service.buscarTodos(pageable);
 		adocaoVO.stream()
 				.forEach(f -> f.add(linkTo(methodOn(AdocaoController.class).findById(f.getKey())).withSelfRel()));
 		return ResponseEntity.ok(CollectionModel.of(adocaoVO));
 	}
 	
-	@GetMapping(value = "/busca", produces = { "application/json", "application/xml" })
+	@GetMapping(value = "/buscausuario/{idUsuario}", produces = { "application/json", "application/xml" })
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<CollectionModel<AdocaoVO>> findAllByIdUsuario(
-			@RequestParam(value = "idUsuario") Long idUsuario,
+			@PathVariable("idUsuario") Long idUsuario,
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
@@ -67,7 +67,7 @@ public class AdocaoController {
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "id"));
 		Page<AdocaoVO> adocaoVO = service.buscarTodosPorUsuario(idUsuario, pageable);
 		adocaoVO.stream()
-				.forEach(f -> f.add(linkTo(methodOn(AdocaoController.class).findById(f.getKey())).withSelfRel()));
+				.forEach(a -> a.add(linkTo(methodOn(AdocaoController.class).findById(a.getKey())).withSelfRel()));
 		return ResponseEntity.ok(CollectionModel.of(adocaoVO));
 	}
 	

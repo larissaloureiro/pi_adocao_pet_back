@@ -80,12 +80,12 @@ public class Usuario implements Serializable {
 	private String cep;
 
 	@NotBlank
-	@Size(max = 9)
+	@Size(max = 25)
 	@Column(name = "localidade_end_usuario")
 	private String localidade;
 
 	@NotBlank
-	@Size(max = 9)
+	@Size(max = 2)
 	@Column(name = "uf_end_usuario")
 	private String uf;
 
