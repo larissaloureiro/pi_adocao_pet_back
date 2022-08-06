@@ -1,4 +1,4 @@
-package br.com.pi_adocao_pet_back.controller;
+/*package br.com.pi_adocao_pet_back.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -67,4 +67,4 @@ public class AuthController {
 		
 	}
 
-}
+}*/

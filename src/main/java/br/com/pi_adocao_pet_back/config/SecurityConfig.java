@@ -1,46 +1,24 @@
 package br.com.pi_adocao_pet_back.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import br.com.pi_adocao_pet_back.security.jwt.JwtProvider;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@ConfigurationProperties(prefix = "security.config")
 
-	@Autowired
-	private JwtProvider jwtProvider;
+	public class SecurityConfig {
+	
+    public static String PREFIX;
+    public static String KEY;
+    public static Long EXPIRATION;
 
-	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = 
-				new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
-	}
-	
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception{
-		return super.authenticationManagerBean();
-	}
-	
-	protected void configure( HttpSecurity http) throws Exception {
-		http
-			.httpBasic().disable()
-			.csrf().disable()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-			.and()
-				.authorizeRequests()
-				.antMatchers("/auth/signin", "/api-docs/**", "/swagger-ui.html").permitAll()
-				//.antMatchers("/api/**").authenticated()
-				.antMatchers("/users").denyAll()
-			.and()
-			.apply(new br.com.pi_adocao_pet_back.security.jwt.JwtConfigurer(jwtProvider));
-	}
-	
+    public void setPrefix(String prefix){
+        PREFIX = prefix;
+    }
+    public void setKey(String key){
+        KEY = key;
+    }
+    public void setExpiration(Long expiration){
+        EXPIRATION = expiration;
+    }
 }

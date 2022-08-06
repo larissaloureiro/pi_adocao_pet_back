@@ -49,30 +49,30 @@ public class AnimalController {
 		return ResponseEntity.ok(CollectionModel.of(animalVO));
 	}
 
-	@GetMapping(value = "/buscadisponivel", produces = { "application/json", "application/xml" })
+	@GetMapping(value = "/disponivel/{disponivel}", produces = { "application/json", "application/xml" })
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<CollectionModel<AnimalVO>> findAllByDisponivel(
-			@RequestParam(value = "disponivel") Boolean disponivel,
+			@PathVariable("disponivel") Boolean disponivel,
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
-		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "DataCadastro"));
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "dataCadastro"));
 		Page<AnimalVO> animalVO = service.buscarTodosPorDisponivel(disponivel, pageable);
 		animalVO.stream()
 				.forEach(f -> f.add(linkTo(methodOn(AnimalController.class).findById(f.getKey())).withSelfRel()));
 		return ResponseEntity.ok(CollectionModel.of(animalVO));
 	}
 
-	@GetMapping(value = "/buscaespecie", produces = { "application/json", "application/xml" })
+	@GetMapping(value = "/especie/{especie}", produces = { "application/json", "application/xml" })
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<CollectionModel<AnimalVO>> findAllByEspecie(
-			@RequestParam(value = "especie") String especie,
+			@PathVariable("especie") String especie,
 			@RequestParam(value = "page", defaultValue = "0") int page,
 			@RequestParam(value = "limit", defaultValue = "10") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
-		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "DataCadastro"));
+		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "dataCadastro"));
 		Page<AnimalVO> animalVO = service.buscarTodosPorEspecie(especie, pageable);
 		animalVO.stream()
 				.forEach(f -> f.add(linkTo(methodOn(AnimalController.class).findById(f.getKey())).withSelfRel()));

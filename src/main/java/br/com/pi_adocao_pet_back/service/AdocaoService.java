@@ -16,9 +16,10 @@ public class AdocaoService {
 	@Autowired
 	AdocaoRepository repository;
 
-	public AdocaoVO inserir(AdocaoVO endereco) {
-		var entity = DozerConverter.parseObject(endereco, Adocao.class);
+	public AdocaoVO inserir(AdocaoVO adocaoVO) {
+		var entity = DozerConverter.parseObject(adocaoVO, Adocao.class);
 		var vo = DozerConverter.parseObject(repository.save(entity), AdocaoVO.class);
+		System.out.println(adocaoVO.getStatus());
 		return vo;
 	}
 

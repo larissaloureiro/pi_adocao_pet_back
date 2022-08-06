@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -55,7 +56,7 @@ public class Animal implements Serializable {
 	@Column(name = "porte")
 	private String porte;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "idade")
 	private Integer idade;
 
@@ -65,15 +66,15 @@ public class Animal implements Serializable {
 	private String sexo;
 
 	@NotBlank
-	@Size(max = 50)
+	@Size(max = 500)
 	@Column(name = "foto_url")
 	private String fotoUrl;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "data_cadastro")
 	private Date dataCadastro;
 
-	@NotBlank
+	@NotNull
 	@Column(name = "disponivel")
 	private Boolean disponivel;
 

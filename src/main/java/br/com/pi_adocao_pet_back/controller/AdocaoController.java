@@ -5,6 +5,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +36,9 @@ import br.com.pi_adocao_pet_back.service.AdocaoService;
 @RestController
 @RequestMapping("/api/adocao/v1")
 public class AdocaoController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AdocaoController.class);
+
 	@Autowired
 	AdocaoService service;
 
@@ -81,6 +86,7 @@ public class AdocaoController {
 	public AdocaoVO create(@Valid @RequestBody AdocaoVO adocao) {
 		AdocaoVO adocaoVO = service.inserir(adocao);
 		adocaoVO.add(linkTo(methodOn(AdocaoController.class).findById(adocaoVO.getKey())).withSelfRel());
+		logger.info("Status" + adocaoVO.getStatus());
 		return adocaoVO;
 	}
 
