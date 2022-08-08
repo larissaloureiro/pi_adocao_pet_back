@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -64,53 +65,17 @@ public class Usuario implements Serializable {
 	@Column(name = "data_nascimento_usuario")
 	private Date dataNascimento;
 
-	@NotNull
-	@Column(name = "data_cadastro_usuario")
-	private Date dataCadastro;
-
-	// Endereco
-	@NotBlank
-	@Size(max = 50)
-	@Column(name = "logradouro_end_usuario")
-	private String logradouro;
-
-	@NotBlank
-	@Size(max = 9)
-	@Column(name = "cep_end_usuario")
-	private String cep;
-
-	@NotBlank
-	@Size(max = 25)
-	@Column(name = "localidade_end_usuario")
-	private String localidade;
-
-	@NotBlank
-	@Size(max = 2)
-	@Column(name = "uf_end_usuario")
-	private String uf;
-
-	@NotBlank
-	@Size(max = 9)
-	@Column(name = "numero_end_usuario")
-	private String numero;
-
-	@NotBlank
-	@Size(max = 15)
-	@Column(name = "complemento_end_usuario")
-	private String complemento;
-
-	@NotBlank
-	@Size(max = 45)
-	@Column(name = "referencia_end_usuario")
-	private String referencia;
-	// Fim do Endereco
-
-	//@NotBlank
-	//@Size(max = 15)
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_usuario",length = 15,nullable = false)
 	private Tipo tipo;
-
+	
+	@Embedded
+	private Endereco endereco;
+	
+	@NotNull
+	@Column(name = "data_cadastro_usuario")
+	private Date dataCadastro;
+	
 	public Boolean validaCpf() {
 		if (this.cpf.length() != 11) {
 			return false;

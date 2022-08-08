@@ -61,13 +61,7 @@ public class UsuarioService {
 		entity.setDataNascimento(usuario.getDataNascimento());
 		entity.setDataCadastro(usuario.getDataCadastro());
 
-		entity.setLogradouro(usuario.getLogradouro());
-		entity.setCep(usuario.getCep());
-		entity.setLocalidade(usuario.getLocalidade());
-		entity.setUf(usuario.getUf());
-		entity.setNumero(usuario.getNumero());
-		entity.setComplemento(usuario.getComplemento());
-		entity.setReferencia(usuario.getReferencia());
+		entity.setEndereco(usuario.getEndereco());
 
 		entity.setTipo(usuario.getTipo());
 

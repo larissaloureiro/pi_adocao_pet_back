@@ -8,6 +8,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 import com.github.dozermapper.core.Mapping;
 
+import br.com.pi_adocao_pet_back.domain.entity.Endereco;
 import br.com.pi_adocao_pet_back.domain.entity.Tipo;
 
 public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Serializable {
@@ -23,20 +24,14 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 	private String cpf;
 	private Date dataNascimento;
 	private Date dataCadastro;
-
-	private String logradouro;
-	private String cep;
-	private String localidade;
-	private String uf;
-	private String numero;
-	private String complemento;
-	private String referencia;
+	
+	private Endereco endereco;
 
 	private Tipo tipo;
 
 	public UsuarioVO(Long key, String nome, String telefone, String email, String rg, String cpf, Date dataNascimento,
-			Date dataCadastro, String logradouro, String cep, String localidade, String uf, String numero,
-			String complemento, String referencia, Tipo tipo) {
+			Date dataCadastro, Endereco endereco, Tipo tipo) {
+		super();
 		this.key = key;
 		this.nome = nome;
 		this.telefone = telefone;
@@ -45,18 +40,8 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.dataCadastro = dataCadastro;
-		this.logradouro = logradouro;
-		this.cep = cep;
-		this.localidade = localidade;
-		this.uf = uf;
-		this.numero = numero;
-		this.complemento = complemento;
-		this.referencia = referencia;
+		this.endereco = endereco;
 		this.tipo = tipo;
-	}
-		public UsuarioVO() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getKey() {
@@ -123,60 +108,12 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.dataCadastro = dataCadastro;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getLocalidade() {
-		return localidade;
-	}
-
-	public void setLocalidade(String localidade) {
-		this.localidade = localidade;
-	}
-
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getReferencia() {
-		return referencia;
-	}
-
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public Tipo getTipo() {
@@ -191,8 +128,8 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(cep, complemento, cpf, dataCadastro, dataNascimento, email, key,
-				localidade, logradouro, nome, numero, referencia, rg, telefone, tipo, uf);
+		result = prime * result
+				+ Objects.hash(cpf, dataCadastro, dataNascimento, email, endereco, key, nome, rg, telefone, tipo);
 		return result;
 	}
 
@@ -205,14 +142,11 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		if (getClass() != obj.getClass())
 			return false;
 		UsuarioVO other = (UsuarioVO) obj;
-		return Objects.equals(cep, other.cep) && Objects.equals(complemento, other.complemento)
-				&& Objects.equals(cpf, other.cpf) && Objects.equals(dataCadastro, other.dataCadastro)
+		return Objects.equals(cpf, other.cpf) && Objects.equals(dataCadastro, other.dataCadastro)
 				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
-				&& Objects.equals(key, other.key) && Objects.equals(localidade, other.localidade)
-				&& Objects.equals(logradouro, other.logradouro) && Objects.equals(nome, other.nome)
-				&& Objects.equals(numero, other.numero) && Objects.equals(referencia, other.referencia)
-				&& Objects.equals(rg, other.rg) && Objects.equals(telefone, other.telefone) && tipo == other.tipo
-				&& Objects.equals(uf, other.uf);
+				&& Objects.equals(endereco, other.endereco) && Objects.equals(key, other.key)
+				&& Objects.equals(nome, other.nome) && Objects.equals(rg, other.rg)
+				&& Objects.equals(telefone, other.telefone) && tipo == other.tipo;
 	}
 
 }

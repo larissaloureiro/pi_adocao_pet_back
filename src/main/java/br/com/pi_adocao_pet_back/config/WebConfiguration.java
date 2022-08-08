@@ -1,16 +1,14 @@
 package br.com.pi_adocao_pet_back.config;
 
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import br.com.pi_adocao_pet_back.security.jwt.JwtTokenFilter;
 
@@ -50,4 +48,9 @@ public class WebConfiguration extends WebSecurityConfigurerAdapter {
 //               .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
   
+    public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**") //mapear todos
+		.allowedMethods("GET", "PUT", "POST", "DELETE", "PATH", "OPTIONS", "TRACE", "HEAD", "CONNECT");
+	}	
+
 }
