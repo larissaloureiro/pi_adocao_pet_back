@@ -86,7 +86,7 @@ public class AdocaoController {
 	public AdocaoVO create(@Valid @RequestBody AdocaoVO adocao) {
 		AdocaoVO adocaoVO = service.inserir(adocao);
 		adocaoVO.add(linkTo(methodOn(AdocaoController.class).findById(adocaoVO.getKey())).withSelfRel());
-		logger.info("Status" + adocaoVO.getStatus());
+		logger.info("Status " + adocaoVO.getStatus());
 		return adocaoVO;
 	}
 

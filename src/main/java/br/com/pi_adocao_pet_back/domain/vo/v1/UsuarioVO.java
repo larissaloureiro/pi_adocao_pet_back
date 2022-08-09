@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.github.dozermapper.core.Mapping;
@@ -42,6 +43,12 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.dataCadastro = dataCadastro;
 		this.endereco = endereco;
 		this.tipo = tipo;
+	}
+
+	
+	public UsuarioVO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getKey() {

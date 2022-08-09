@@ -1,5 +1,7 @@
 package br.com.pi_adocao_pet_back.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +17,11 @@ import br.com.pi_adocao_pet_back.repository.AdocaoRepository;
 public class AdocaoService {
 	@Autowired
 	AdocaoRepository repository;
-
-	public AdocaoVO inserir(AdocaoVO adocaoVO) {
-		var entity = DozerConverter.parseObject(adocaoVO, Adocao.class);
-		var vo = DozerConverter.parseObject(repository.save(entity), AdocaoVO.class);
-		return vo;
+	
+	public AdocaoVO inserir(AdocaoVO adocao) {
+		var entity = DozerConverter.parseObject(adocao, Adocao.class);
+		var adocaoVO = DozerConverter.parseObject(repository.save(entity), AdocaoVO.class);
+		return adocaoVO;
 	}
 
 	public Page<AdocaoVO> buscarTodos(Pageable pageable) {
