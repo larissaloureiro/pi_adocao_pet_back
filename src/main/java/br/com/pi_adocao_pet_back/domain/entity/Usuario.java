@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_Usuario")
+@Table(name = "tb_usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -64,10 +64,6 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Column(name = "data_nascimento_usuario")
 	private Date dataNascimento;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_usuario",length = 15,nullable = false)
-	private Tipo tipo;
 	
 	@Embedded
 	private Endereco endereco;
@@ -75,6 +71,8 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Column(name = "data_cadastro_usuario")
 	private Date dataCadastro;
+	
+
 	
 	public Boolean validaCpf() {
 		if (this.cpf.length() != 11) {

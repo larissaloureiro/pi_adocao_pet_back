@@ -63,7 +63,6 @@ public class UsuarioService {
 
 		entity.setEndereco(usuario.getEndereco());
 
-		entity.setTipo(usuario.getTipo());
 
 		if (!entity.validaCpf()) {
 			throw new IllegalArgumentException("CPF Inválido.");

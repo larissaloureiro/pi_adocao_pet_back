@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -33,15 +40,20 @@ public class Login implements UserDetails, Serializable {
 	@Column(name = "id_login")
 	private Long id;
 
-//	@OneToOne
-//	@JoinColumn(name = "id_usuario")
-//	private Usuario usuario;
+	@OneToOne
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
 
 	@Column(name = "username_login", unique = true) // não permite repetição do valor do objeto
 	private String username;
 
 	@Column(name = "senha_login")
 	private String senha;
+	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "id_login"))
+	@Column(name = "role_id")
+	private List<String> roles = new ArrayList<>();
 
 	@Column(name = "account_non_expired")
 	private Boolean accountNonExpired;
@@ -55,11 +67,11 @@ public class Login implements UserDetails, Serializable {
 	@Column(name = "enable")
 	private Boolean enable;
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "permissao_login", joinColumns = { @JoinColumn(name = "id_login") }, inverseJoinColumns = {
-//			@JoinColumn(name = "id_permissao") })
-//	private List<Permissao> permissoes;
-//
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "permissao_login", joinColumns = { @JoinColumn(name = "id_login") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_permissao") })
+	private List<Permissao> permissoes;
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -108,9 +120,9 @@ public class Login implements UserDetails, Serializable {
 	public List<String> getRoles() {
 		List<String> roles = new ArrayList<>();
 		
-//		for (Permissao permissao : this.permissoes) {
-//			roles.add(permissao.getDescricao());
-//		}
+		for (Permissao permissao : this.permissoes) {
+			roles.add(permissao.getDescription());
+		}
 		return roles;
 	}
 

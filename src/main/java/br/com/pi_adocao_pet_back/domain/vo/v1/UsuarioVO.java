@@ -4,13 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 
 import com.github.dozermapper.core.Mapping;
 
 import br.com.pi_adocao_pet_back.domain.entity.Endereco;
-import br.com.pi_adocao_pet_back.domain.entity.Tipo;
+
 
 public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -28,10 +27,10 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 	
 	private Endereco endereco;
 
-	private Tipo tipo;
+
 
 	public UsuarioVO(Long key, String nome, String telefone, String email, String rg, String cpf, Date dataNascimento,
-			Date dataCadastro, Endereco endereco, Tipo tipo) {
+			Date dataCadastro, Endereco endereco) {
 		super();
 		this.key = key;
 		this.nome = nome;
@@ -42,7 +41,7 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.dataNascimento = dataNascimento;
 		this.dataCadastro = dataCadastro;
 		this.endereco = endereco;
-		this.tipo = tipo;
+		
 	}
 
 	
@@ -123,20 +122,13 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		this.endereco = endereco;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ Objects.hash(cpf, dataCadastro, dataNascimento, email, endereco, key, nome, rg, telefone, tipo);
+				+ Objects.hash(cpf, dataCadastro, dataNascimento, email, endereco, key, nome, rg, telefone);
 		return result;
 	}
 
@@ -153,7 +145,7 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(key, other.key)
 				&& Objects.equals(nome, other.nome) && Objects.equals(rg, other.rg)
-				&& Objects.equals(telefone, other.telefone) && tipo == other.tipo;
+				&& Objects.equals(telefone, other.telefone);
 	}
 
 }

@@ -1,4 +1,4 @@
-/*package br.com.pi_adocao_pet_back.controller;
+package br.com.pi_adocao_pet_back.controller;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -39,11 +39,11 @@ public class AuthController {
 
 	@PostMapping(value = "/signin", produces = { "application/json", "application/xml" }, 
 			consumes = { "application/json",	"application/xml" })
-	public ResponseEntity signin(@RequestBody LoginVO cred) {
+	public ResponseEntity signin(@RequestBody LoginVO loginVO) {
 		
 		try {
-			var username = cred.getUsername();
-			var password = cred.getSenha();
+			var username = loginVO.getUsername();
+			var password = loginVO.getPassword();
 			
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(username, password));
@@ -67,4 +67,4 @@ public class AuthController {
 		
 	}
 
-}*/
+}
