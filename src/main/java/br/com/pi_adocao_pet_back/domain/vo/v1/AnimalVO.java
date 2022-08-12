@@ -28,7 +28,7 @@ public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializa
 	private String porte;
 	private Integer idade;
 	private String sexo;
-	private String fotoUrl;
+	private String fotoBase64;
 	private Date dataCadastro;
 	private Boolean disponivel;
 	private String infAdicionais;
@@ -44,7 +44,7 @@ public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializa
 		AnimalVO other = (AnimalVO) obj;
 		return Objects.equals(dataCadastro, other.dataCadastro) && Objects.equals(descricao, other.descricao)
 				&& Objects.equals(disponivel, other.disponivel) && Objects.equals(especie, other.especie)
-				&& Objects.equals(fotoUrl, other.fotoUrl) && Objects.equals(idade, other.idade)
+				&& Objects.equals(fotoBase64, other.fotoBase64) && Objects.equals(idade, other.idade)
 				&& Objects.equals(infAdicionais, other.infAdicionais) && Objects.equals(key, other.key)
 				&& Objects.equals(nome, other.nome) && Objects.equals(porte, other.porte)
 				&& Objects.equals(raca, other.raca) && Objects.equals(sexo, other.sexo);
@@ -54,7 +54,7 @@ public class AnimalVO extends RepresentationModel<AnimalVO> implements Serializa
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(dataCadastro, descricao, disponivel, especie, fotoUrl, idade,
+		result = prime * result + Objects.hash(dataCadastro, descricao, disponivel, especie, fotoBase64, idade,
 				infAdicionais, key, nome, porte, raca, sexo);
 		return result;
 	}
