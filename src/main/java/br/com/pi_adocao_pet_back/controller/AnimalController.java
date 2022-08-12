@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi_adocao_pet_back.domain.vo.v1.AnimalVO;
 import br.com.pi_adocao_pet_back.service.AnimalService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
-
+@Tag(name = "Animal Endpoint")
 @RestController
 @RequestMapping ("/api/animal/v1/")
 public class AnimalController {
@@ -36,6 +38,7 @@ public class AnimalController {
 	AnimalService service;
 
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json", "application/xml" })
+	@Operation(summary = "Listar todas os animais")
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<CollectionModel<AnimalVO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") int page,
