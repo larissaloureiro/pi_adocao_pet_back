@@ -28,7 +28,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.pi_adocao_pet_back.domain.vo.v1.UsuarioVO;
 import br.com.pi_adocao_pet_back.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Usuario Endpoint")
 @RestController
 @RequestMapping("/api/usuario/v1")
 public class UsuarioController {
@@ -36,6 +39,7 @@ public class UsuarioController {
 	UsuarioService service;
 	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json","application/xml"})
+	@Operation(summary = "Listar todas os usuarios")
 	@ResponseStatus(value=HttpStatus.OK)
 	public ResponseEntity<CollectionModel<UsuarioVO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") int page,
