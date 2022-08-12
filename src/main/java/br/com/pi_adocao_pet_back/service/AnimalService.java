@@ -47,7 +47,7 @@ public class AnimalService {
 		entity.setPorte(animal.getPorte());
 		entity.setIdade(animal.getIdade());
 		entity.setSexo(animal.getSexo());
-		entity.setFotoUrl(animal.getFotoUrl());
+		entity.setFotoBase64(animal.getFotoBase64());
 		entity.setDataCadastro(animal.getDataCadastro());
 		entity.setDisponivel(animal.getDisponivel());
 		entity.setInfAdicionais(animal.getInfAdicionais());

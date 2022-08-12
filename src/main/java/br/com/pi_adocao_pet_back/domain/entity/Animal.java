@@ -66,9 +66,9 @@ public class Animal implements Serializable {
 	private String sexo;
 
 	@NotBlank
-	@Size(max = 500)
-	@Column(name = "foto_url")
-	private String fotoUrl;
+	@Size(max = 500000)
+	@Column(name = "foto_base64")
+	private String fotoBase64;
 
 	@NotNull
 	@Column(name = "data_cadastro")
