@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,7 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pi_adocao_pet_back.domain.dto.UsuarioAlterPermissaoDTO;
+import br.com.pi_adocao_pet_back.domain.dto.UsuarioLoginDTO;
+import br.com.pi_adocao_pet_back.domain.entity.Login;
 import br.com.pi_adocao_pet_back.domain.vo.v1.UsuarioVO;
+import br.com.pi_adocao_pet_back.security.LoginVO;
 import br.com.pi_adocao_pet_back.service.UsuarioService;
 
 @RestController
@@ -45,7 +50,7 @@ public class UsuarioController {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "nome"));
 		Page<UsuarioVO> usuariosVO = service.buscarTodos(pageable);
-		usuariosVO.stream().forEach(u -> u.add(linkTo(methodOn(UsuarioController.class).findById(u.getKey())).withSelfRel()));
+		usuariosVO.stream().forEach(u -> u.add(linkTo(methodOn(UsuarioController.class).findById(u.getId())).withSelfRel()));
 		return ResponseEntity.ok(CollectionModel.of(usuariosVO));
 	}
 	
@@ -59,9 +64,11 @@ public class UsuarioController {
 	
 	@PostMapping(consumes = {"application/json","application/xml"}, produces={"application/json","application/xml"})
 	@ResponseStatus(value=HttpStatus.CREATED)
-	public UsuarioVO create(@Valid @RequestBody UsuarioVO usuario) {
-		UsuarioVO usuarioVO = service.inserir(usuario);
-		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(usuarioVO.getKey())).withSelfRel());
+	public UsuarioVO create(@Valid @RequestBody UsuarioLoginDTO usuariologinDTO) {
+		service.inserir(usuariologinDTO);
+		UsuarioVO usuarioVO = service.inserir(usuariologinDTO);
+		//UsuarioVO usuarioVO = service.inserir(usuario);
+		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(usuarioVO.getId())).withSelfRel());
 		return usuarioVO;
 	}
 	
@@ -69,7 +76,7 @@ public class UsuarioController {
 	@ResponseStatus(value=HttpStatus.OK)
 	public UsuarioVO update(@Valid @RequestBody UsuarioVO usuario) {
 		UsuarioVO usuarioVO = service.atualizar(usuario);
-		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(usuarioVO.getKey())).withSelfRel());
+		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(usuarioVO.getId())).withSelfRel());
 		return usuarioVO;
 	}
 	
@@ -77,6 +84,12 @@ public class UsuarioController {
 	@ResponseStatus(value=HttpStatus.OK)
 	public void delete(@PathVariable("id") Long id) {
 		service.delete(id);
+	}
+	
+	@PatchMapping(consumes = {"application/json","application/xml"}, produces={"application/json","application/xml"})
+	@ResponseStatus(value=HttpStatus.OK)
+	public ResponseEntity<String> addPermissionInUser(@Valid @RequestBody UsuarioAlterPermissaoDTO usuarioAlterPermissaoDTO) {
+		return service.atualizarPermissao(usuarioAlterPermissaoDTO);
 	}
 
 }

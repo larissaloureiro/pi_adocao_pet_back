@@ -48,12 +48,12 @@ public class Login implements UserDetails, Serializable {
 	private String username;
 
 	@Column(name = "senha_login")
-	private String senha;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "id_login"))
-	@Column(name = "role_id")
-	private List<String> roles = new ArrayList<>();
+	private String password;
+//	
+//	@ElementCollection()
+//	@CollectionTable(name = "tab_user_roles", joinColumns = @JoinColumn(name = "id_login"))
+//	@Column(name = "role_id")
+//	private List<String> roles = new ArrayList<>();
 
 	@Column(name = "account_non_expired")
 	private Boolean accountNonExpired;
@@ -67,7 +67,8 @@ public class Login implements UserDetails, Serializable {
 	@Column(name = "enable")
 	private Boolean enable;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	//@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany()
 	@JoinTable(name = "permissao_login", joinColumns = { @JoinColumn(name = "id_login") }, inverseJoinColumns = {
 			@JoinColumn(name = "id_permissao") })
 	private List<Permissao> permissoes;
@@ -83,7 +84,7 @@ public class Login implements UserDetails, Serializable {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return this.senha;
+		return this.password;
 	}
 
 	@Override

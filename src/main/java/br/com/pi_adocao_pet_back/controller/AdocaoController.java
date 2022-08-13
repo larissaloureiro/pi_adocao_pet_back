@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pi_adocao_pet_back.domain.dto.AdocaoUsuarioDTO;
 import br.com.pi_adocao_pet_back.domain.vo.v1.AdocaoVO;
 import br.com.pi_adocao_pet_back.service.AdocaoService;
 
@@ -90,13 +92,13 @@ public class AdocaoController {
 		return adocaoVO;
 	}
 
-	@PutMapping(consumes = { "application/json", "application/xml" }, produces = { "application/json",
+	@PatchMapping(consumes = { "application/json", "application/xml" }, produces = { "application/json",
 			"application/xml" })
 	@ResponseStatus(value = HttpStatus.OK)
-	public AdocaoVO update(@Valid @RequestBody AdocaoVO adocao) {
-		AdocaoVO adocaoVO = service.atualizar(adocao);
-		adocaoVO.add(linkTo(methodOn(AdocaoController.class).findById(adocaoVO.getKey())).withSelfRel());
-		return adocaoVO;
+	public ResponseEntity<String> update(@Valid @RequestBody AdocaoUsuarioDTO adocaousuarioDTO) {
+		//AdocaoVO adocaoVO = service.atualizar(adocaousuarioDTO);
+		//adocaoVO.add(linkTo(methodOn(AdocaoController.class).findById(adocaoVO.getKey())).withSelfRel());
+		return service.atualizar(adocaousuarioDTO);
 	}
 
 	@DeleteMapping(value = "/{id}", produces = { "application/json", "application/xml" })

@@ -36,7 +36,7 @@ public class AuthController {
 
 	@Autowired
 	LoginRepository repository;
-
+	
 	@PostMapping(value = "/signin", produces = { "application/json", "application/xml" }, 
 			consumes = { "application/json",	"application/xml" })
 	public ResponseEntity signin(@RequestBody LoginVO loginVO) {

@@ -15,7 +15,7 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 	private static final long serialVersionUID = 1L;
 
 	@Mapping("id")
-	private Long key;
+	private Long id;
 
 	private String nome;
 	private String telefone;
@@ -29,10 +29,10 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 
 
 
-	public UsuarioVO(Long key, String nome, String telefone, String email, String rg, String cpf, Date dataNascimento,
+	public UsuarioVO(Long id, String nome, String telefone, String email, String rg, String cpf, Date dataNascimento,
 			Date dataCadastro, Endereco endereco) {
 		super();
-		this.key = key;
+		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
@@ -50,12 +50,12 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getKey() {
-		return key;
+	public Long getId() {
+		return id;
 	}
 
-	public void setKey(Long key) {
-		this.key = key;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -128,7 +128,7 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ Objects.hash(cpf, dataCadastro, dataNascimento, email, endereco, key, nome, rg, telefone);
+				+ Objects.hash(cpf, dataCadastro, dataNascimento, email, endereco, id, nome, rg, telefone);
 		return result;
 	}
 
@@ -143,7 +143,7 @@ public class UsuarioVO extends RepresentationModel<UsuarioVO> implements Seriali
 		UsuarioVO other = (UsuarioVO) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(dataCadastro, other.dataCadastro)
 				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
-				&& Objects.equals(endereco, other.endereco) && Objects.equals(key, other.key)
+				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id)
 				&& Objects.equals(nome, other.nome) && Objects.equals(rg, other.rg)
 				&& Objects.equals(telefone, other.telefone);
 	}

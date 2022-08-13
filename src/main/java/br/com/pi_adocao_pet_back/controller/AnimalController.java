@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pi_adocao_pet_back.domain.dto.AnimalUsuarioDTO;
 import br.com.pi_adocao_pet_back.domain.vo.v1.AnimalVO;
 import br.com.pi_adocao_pet_back.service.AnimalService;
 
@@ -81,7 +82,7 @@ public class AnimalController {
 
 	@GetMapping(value = "/{id}", produces = { "application/json", "application/xml" })
 	@ResponseStatus(value = HttpStatus.OK)
-	public AnimalVO findById(@PathVariable("id") Long id) {
+	public AnimalVO findById(@PathVariable("id") Long id ) {
 		AnimalVO animalVO = service.buscarPorId(id);
 		animalVO.add(linkTo(methodOn(AnimalController.class).findById(id)).withSelfRel());
 		return animalVO;
@@ -90,10 +91,10 @@ public class AnimalController {
 	@PostMapping(consumes = { "application/json", "application/xml" }, produces = { "application/json",
 			"application/xml" })
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public AnimalVO create(@Valid @RequestBody AnimalVO animal) {
-		AnimalVO animalVO = service.inserir(animal);
-		animalVO.add(linkTo(methodOn(AnimalController.class).findById(animalVO.getKey())).withSelfRel());
-		return animalVO;
+	public ResponseEntity<String> create(@Valid @RequestBody AnimalUsuarioDTO animalusuarioDTO) {
+//		AnimalVO animalVO = service.inserir(animalusuarioDTO);
+//		animalVO.add(linkTo(methodOn(AnimalController.class).findById(animalVO.getKey())).withSelfRel());
+		return service.inserir(animalusuarioDTO);
 	}
 
 	@PutMapping(consumes = { "application/json", "application/xml" }, produces = { "application/json",

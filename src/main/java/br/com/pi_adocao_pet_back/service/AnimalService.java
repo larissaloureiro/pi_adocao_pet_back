@@ -3,10 +3,14 @@ package br.com.pi_adocao_pet_back.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.pi_adocao_pet_back.adapter.DozerConverter;
+import br.com.pi_adocao_pet_back.domain.dto.AnimalUsuarioDTO;
 import br.com.pi_adocao_pet_back.domain.entity.Animal;
+import br.com.pi_adocao_pet_back.domain.entity.Login;
 import br.com.pi_adocao_pet_back.domain.vo.v1.AnimalVO;
 import br.com.pi_adocao_pet_back.exception.ResourceNotFoundException;
 import br.com.pi_adocao_pet_back.repository.AnimalRepository;
@@ -16,7 +20,12 @@ public class AnimalService {
 	
 	@Autowired
 	AnimalRepository repository;
+	
+	@Autowired
+	LoginService loginService;
 
+	final String ADMINISTRADOR = "administrador";
+	
 	private AnimalVO convertToAnimalVO(Animal entity) {
 		return DozerConverter.parseObject(entity, AnimalVO.class);
 	}
@@ -25,10 +34,20 @@ public class AnimalService {
 		return DozerConverter.parseObject(vo, Animal.class);
 	}
 
-	public AnimalVO inserir(AnimalVO animal) {
-		var entity = convertToAnimal(animal);
-		var vo = convertToAnimalVO(repository.save(entity));
-		return vo;
+	public ResponseEntity<String> inserir(AnimalUsuarioDTO animalusuarioDTO) {
+		var entity = convertToAnimal(animalusuarioDTO.getAnimalVO());
+		Login login = loginService.findLoginByUser(animalusuarioDTO.getUsuarioVO());
+		AnimalVO vo = null;
+		if(login.getRoles().contains(ADMINISTRADOR)) {
+
+			vo = convertToAnimalVO(repository.save(entity));
+			if(vo == null) {
+				return new ResponseEntity<>("Erro ao cadastrar Animal", HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>("Animal Cadastrado com sucesso", HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Usuario não tem permissão para cadastrar Animal", HttpStatus.FORBIDDEN);
+		}
 	}
 
 	public void delete(Long id) {
