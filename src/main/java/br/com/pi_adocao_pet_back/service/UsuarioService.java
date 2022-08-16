@@ -81,6 +81,12 @@ public class UsuarioService {
 				.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado registro com esse ID."));
 		return DozerConverter.parseObject(entity, UsuarioVO.class);
 	}
+	public UsuarioVO buscarPorUsername(String username) {
+		Usuario entity = loginService.findByUsername(username).getUsuario();
+		
+		
+		return DozerConverter.parseObject(entity, UsuarioVO.class);
+	}
 
 	public void delete(Long id) {
 		Usuario entity = repository.findById(id)

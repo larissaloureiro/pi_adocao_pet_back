@@ -34,4 +34,13 @@ public class LoginService implements UserDetailsService {
 			throw new UsernameNotFoundException("Username" + username + "não localizado!");
 		}
 	}
+	
+	public Login findByUsername(String username) throws UsernameNotFoundException {
+		var user = repository.findByUsername(username);
+		if (user != null) {
+			return user;
+		} else {
+			throw new UsernameNotFoundException("Username" + username + "não localizado!");
+		}
+	}
 }
