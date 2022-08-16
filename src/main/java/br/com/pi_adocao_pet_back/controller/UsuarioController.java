@@ -69,7 +69,6 @@ public class UsuarioController {
 	@PostMapping(consumes = {"application/json","application/xml"}, produces={"application/json","application/xml"})
 	@ResponseStatus(value=HttpStatus.CREATED)
 	public UsuarioVO create(@Valid @RequestBody UsuarioLoginDTO usuariologinDTO) {
-		service.inserir(usuariologinDTO);
 		UsuarioVO usuarioVO = service.inserir(usuariologinDTO);
 		//UsuarioVO usuarioVO = service.inserir(usuario);
 		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(usuarioVO.getId())).withSelfRel());

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,6 +23,7 @@ import br.com.pi_adocao_pet_back.repository.LoginRepository;
 import br.com.pi_adocao_pet_back.security.LoginVO;
 //import io.swagger.v3.oas.annotations.tags.Tag;
 import br.com.pi_adocao_pet_back.security.jwt.JwtProvider;
+import net.bytebuddy.asm.Advice.Return;
 
 //@Tag(name="Authentication Endpoint")
 @RestController
@@ -31,8 +33,8 @@ public class AuthController {
 	@Autowired	
 	AuthenticationManager authenticationManager;
 
-	@Autowired
-	JwtProvider tokenProvider;
+	//@Autowired
+	//JwtProvider tokenProvider;
 
 	@Autowired
 	LoginRepository repository;
@@ -41,29 +43,39 @@ public class AuthController {
 			consumes = { "application/json",	"application/xml" })
 	public ResponseEntity signin(@RequestBody LoginVO loginVO) {
 		
-		try {
+		//try {
 			var username = loginVO.getUsername();
 			var password = loginVO.getPassword();
 			
-			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(username, password));
-			
+//			authenticationManager.authenticate(
+//					new UsernamePasswordAuthenticationToken(username, password));
+//			
 			var user = repository.findByUsername(username);
-			var token = "";
+			//var token = "";
 			
 			if (user !=null) {
-				token = tokenProvider.createToken(username, user.getRoles());
+				//token = tokenProvider.createToken(username, user.getRoles());
+				if(user.getPassword().equals(password)) {
+
+					return new ResponseEntity<>("Login realizado com sucesso", HttpStatus.OK);
+
+				}else {
+					return new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
+
+				}
 			}else {
-				throw new UsernameNotFoundException("Usuário " + username+ "não localizado");
+
+				return new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
 			}
-			Map<Object, Object> model = new HashMap<>();
-			model.put("username", username);
-			model.put("token", token);
-			
-			return ok(model);
-		} catch (AuthenticationException e) {
-			throw new BadCredentialsException("Usuário ou senha inválidos");
-		}
+//			
+//			Map<Object, Object> model = new HashMap<>();
+//			model.put("username", username);
+//			//model.put("token", token);
+//			
+//			return ok(model);
+//		} catch (AuthenticationException e) {
+//			throw new BadCredentialsException("Usuário ou senha inválidos");
+//		}
 		
 	}
 
