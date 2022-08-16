@@ -32,6 +32,7 @@ import br.com.pi_adocao_pet_back.domain.dto.UsuarioLoginDTO;
 import br.com.pi_adocao_pet_back.domain.entity.Login;
 import br.com.pi_adocao_pet_back.domain.vo.v1.UsuarioVO;
 import br.com.pi_adocao_pet_back.security.LoginVO;
+import br.com.pi_adocao_pet_back.service.LoginService;
 import br.com.pi_adocao_pet_back.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -42,6 +43,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class UsuarioController {
 	@Autowired
 	UsuarioService service;
+
+	@Autowired
+	LoginService loginService;
 	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json","application/xml"})
 	@Operation(summary = "Listar todas os usuarios")
@@ -63,6 +67,14 @@ public class UsuarioController {
 	public UsuarioVO findById(@PathVariable("id") Long id) {
 		UsuarioVO usuarioVO = service.buscarPorId(id);
 		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findById(id)).withSelfRel());
+		return usuarioVO;
+	}
+	
+	@GetMapping(value="username/{username}", produces={"application/json","application/xml"})
+	@ResponseStatus(value=HttpStatus.OK)
+	public UsuarioVO findByUsername(@PathVariable("username") String username) {
+		UsuarioVO usuarioVO = service.buscarPorUsername(username);
+		usuarioVO.add(linkTo(methodOn(UsuarioController.class).findByUsername(username)).withSelfRel());
 		return usuarioVO;
 	}
 	

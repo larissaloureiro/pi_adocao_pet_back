@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import br.com.pi_adocao_pet_back.domain.dto.LoginDTO;
+import br.com.pi_adocao_pet_back.domain.entity.Login;
 import br.com.pi_adocao_pet_back.repository.LoginRepository;
 import br.com.pi_adocao_pet_back.security.LoginVO;
 //import io.swagger.v3.oas.annotations.tags.Tag;
@@ -41,7 +42,7 @@ public class AuthController {
 	
 	@PostMapping(value = "/signin", produces = { "application/json", "application/xml" }, 
 			consumes = { "application/json",	"application/xml" })
-	public ResponseEntity signin(@RequestBody LoginVO loginVO) {
+	public LoginDTO signin(@RequestBody LoginVO loginVO) {
 		
 		//try {
 			var username = loginVO.getUsername();
@@ -51,21 +52,25 @@ public class AuthController {
 //					new UsernamePasswordAuthenticationToken(username, password));
 //			
 			var user = repository.findByUsername(username);
+			LoginDTO loginDTO;
 			//var token = "";
 			
 			if (user !=null) {
+				loginDTO = new LoginDTO();
+				loginDTO.setPermissoes(user.getRoles());
+				loginDTO.setUsername(user.getUsername());
 				//token = tokenProvider.createToken(username, user.getRoles());
 				if(user.getPassword().equals(password)) {
 
-					return new ResponseEntity<>("Login realizado com sucesso", HttpStatus.OK);
+					return loginDTO;//ResponseEntity.ok(user,"Login realizado com sucesso");
 
 				}else {
-					return new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
+					return loginDTO =null;//new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
 
 				}
 			}else {
 
-				return new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
+				return loginDTO = null;//new ResponseEntity<>("Usuario ou senha invalidos", HttpStatus.FORBIDDEN);
 			}
 //			
 //			Map<Object, Object> model = new HashMap<>();
