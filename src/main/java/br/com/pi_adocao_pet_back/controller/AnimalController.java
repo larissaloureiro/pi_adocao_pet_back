@@ -43,7 +43,7 @@ public class AnimalController {
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<CollectionModel<AnimalVO>> findAll(
 			@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "limit", defaultValue = "10") int limit,
+			@RequestParam(value = "limit", defaultValue = "200") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "DataCadastro"));
@@ -58,7 +58,7 @@ public class AnimalController {
 	public ResponseEntity<CollectionModel<AnimalVO>> findAllByDisponivel(
 			@PathVariable("disponivel") Boolean disponivel,
 			@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "limit", defaultValue = "10") int limit,
+			@RequestParam(value = "limit", defaultValue = "200") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "dataCadastro"));
@@ -73,7 +73,7 @@ public class AnimalController {
 	public ResponseEntity<CollectionModel<AnimalVO>> findAllByEspecie(
 			@PathVariable("especie") String especie,
 			@RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "limit", defaultValue = "10") int limit,
+			@RequestParam(value = "limit", defaultValue = "200") int limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction) {
 		var sortDirection = "desc".equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sortDirection, "dataCadastro"));
